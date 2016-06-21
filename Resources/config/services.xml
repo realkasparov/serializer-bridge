@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="f_devs_serializer.mapping.loader.xml_files.class">FDevs\Serializer\Mapping\Loader\XmlFilesLoader</parameter>
+        <parameter key="f_devs_serializer.mapping.factory.lazy_loading.class">FDevs\Serializer\Mapping\Factory\LazyLoadingMetadataFactory</parameter>
+        <parameter key="f_devs_serializer.normalizer.object.class">FDevs\Serializer\Normalizer\ObjectNormalizer</parameter>
+        <parameter key="f_devs_serializer.data_type_factory.class">FDevs\Serializer\DataTypeFactory</parameter>
+        <parameter key="f_devs_serializer.option_registry.class">FDevs\Serializer\OptionRegistry</parameter>
+        <parameter key="f_devs_serializer.data_type.collection.class">FDevs\Serializer\DataType\CollectionType</parameter>
+        <parameter key="f_devs_serializer.data_type.object.class">FDevs\Serializer\DataType\ObjectType</parameter>
+        <parameter key="f_devs_serializer.data_type.doctrine.class">FDevs\Serializer\DataType\DoctrineType</parameter>
+    </parameters>
+
+    <services>
+
+        <!--loader-->
+        <service id="f_devs_serializer.mapping.loader.xml_files" class="%f_devs_serializer.mapping.loader.xml_files.class%">
+            <argument/>
+        </service>
+
+        <!--factory-->
+        <service id="f_devs_serializer.mapping.factory.lazy_loading" class="%f_devs_serializer.mapping.factory.lazy_loading.class%">
+            <argument type="service" id="f_devs_serializer.mapping.loader.xml_files"/>
+        </service>
+
+        <!--normalizer-->
+        <service id="f_devs_serializer.normalizer.object" class="%f_devs_serializer.normalizer.object.class%">
+            <argument type="service" id="f_devs_serializer.mapping.factory.lazy_loading"/>
+            <argument type="service" id="f_devs_serializer.data_type_factory"/>
+            <tag name="serializer.normalizer"/>
+        </service>
+
+        <!--data type registry-->
+        <service id="f_devs_serializer.data_type_factory" class="%f_devs_serializer.data_type_factory.class%">
+            <argument type="collection"/>
+        </service>
+
+        <service id="f_devs_serializer.option_registry" class="%f_devs_serializer.option_registry.class%">
+            <argument type="collection"/>
+        </service>
+
+        <!--data type-->
+        <service id="f_devs_serializer.data_type.collection" class="%f_devs_serializer.data_type.collection.class%" public="false">
+            <argument type="service" id="f_devs_serializer.data_type_factory"/>
+            <tag name="f_devs_serializer.data_type" type="collection"/>
+        </service>
+
+        <service id="f_devs_serializer.data_type.object" class="%f_devs_serializer.data_type.object.class%" public="false">
+            <tag name="f_devs_serializer.data_type" type="object"/>
+        </service>
+
+    </services>
+
+</container>

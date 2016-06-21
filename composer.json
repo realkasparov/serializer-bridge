@@ -1,0 +1,41 @@
+{
+    "name": "fdevs/serializer-bridge",
+    "type": "symfony-bridge",
+    "description": "FDevs Serializer Bridge",
+    "keywords": [
+        "serializer"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrey Samusev",
+            "email": "andrey_simfi@list.ru",
+            "homepage": "http://andrey.4devs.io"
+        },
+        {
+            "name": "4devs Community",
+            "homepage": "https://github.com/4devs/serializer-bridge/contributors"
+        }
+    ],
+    "require": {
+        "symfony/serializer": "~0.1",
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+        "symfony/dependency-injection": "~2.8|~3.0",
+        "symfony/http-kernel": "~2.8|~3.0"
+    },
+    "suggest": {
+        "symfony/dependency-injection": "use with dependency injection",
+        "symfony/http-kernel": "use with symfony bundle"
+    },
+    "autoload": {
+        "psr-4": {
+            "FDevs\\Bridge\\Serializer\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "minimum-stability": "dev"
+}
