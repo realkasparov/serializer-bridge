@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "fdevs/serializer": "~0.1",
+        "fdevs/serializer": "~1.0.x-dev",
         "php": ">=5.5.9"
     },
     "require-dev": {
@@ -36,6 +36,5 @@
         "exclude-from-classmap": [
             "/Tests/"
         ]
-    },
-    "minimum-stability": "dev"
+    }
 }
