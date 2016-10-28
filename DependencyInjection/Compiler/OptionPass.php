@@ -17,7 +17,10 @@ class OptionPass implements CompilerPassInterface
             $definition = $container->getDefinition('f_devs_serializer.option_registry');
             $taggedServices = $container->findTaggedServiceIds('f_devs_serializer.option');
             foreach ($taggedServices as $id => $tags) {
-                $definition->addMethodCall('addOption', [new Reference($id)]);
+                foreach ($tags as $tag) {
+                    $name = isset($tag['option-name']) ? $tag['option-name'] : null;
+                    $definition->addMethodCall('addOption', [new Reference($id), $name]);
+                }
             }
         }
     }

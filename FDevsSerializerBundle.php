@@ -17,7 +17,6 @@ class FDevsSerializerBundle extends Bundle
     {
         $container
             ->addCompilerPass(new DocumentTypePass())
-            ->addCompilerPass(new DataTypePass())
             ->addCompilerPass(new OptionPass())
         ;
     }

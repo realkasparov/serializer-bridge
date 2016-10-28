@@ -10,8 +10,6 @@
         <parameter key="f_devs_serializer.property_factory_factory.class">FDevs\Serializer\PropertyFactory</parameter>
         <parameter key="f_devs_serializer.option_registry.class">FDevs\Serializer\OptionRegistry</parameter>
         <parameter key="f_devs_serializer.option_manager.class">FDevs\Serializer\OptionManager</parameter>
-        <parameter key="f_devs_serializer.data_type.collection.class">FDevs\Serializer\DataType\CollectionType</parameter>
-        <parameter key="f_devs_serializer.data_type.object.class">FDevs\Serializer\DataType\ObjectType</parameter>
         <parameter key="f_devs_serializer.data_type.doctrine.class">FDevs\Serializer\DataType\DoctrineType</parameter>
     </parameters>
 
@@ -46,15 +44,6 @@
 
         <service id="f_devs_serializer.option_manager" class="%f_devs_serializer.option_manager.class%">
             <argument type="service" id="f_devs_serializer.option_registry"/>
-        </service>
-
-        <!--data type-->
-        <service id="f_devs_serializer.data_type.collection" class="%f_devs_serializer.data_type.collection.class%" public="false">
-            <tag name="f_devs_serializer.data_type" type="collection"/>
-        </service>
-
-        <service id="f_devs_serializer.data_type.object" class="%f_devs_serializer.data_type.object.class%" public="false">
-            <tag name="f_devs_serializer.data_type" type="object"/>
         </service>
 
     </services>
