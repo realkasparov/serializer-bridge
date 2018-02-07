@@ -22,10 +22,12 @@
         "php": ">=5.5.9"
     },
     "require-dev": {
-        "symfony/dependency-injection": "~2.8|~3.0",
-        "symfony/http-kernel": "~2.8|~3.0"
+        "symfony/dependency-injection": "^2.8|^3.0|^4.0",
+        "symfony/http-kernel": "^2.8|^3.0|^4.0",
+        "symfony/framework-bundle": "^3.4|^4.0"
     },
     "suggest": {
+        "symfony/framework-bundle": "use with symfony framework",
         "symfony/dependency-injection": "use with dependency injection",
         "symfony/http-kernel": "use with symfony bundle"
     },
@@ -36,5 +38,6 @@
         "exclude-from-classmap": [
             "/Tests/"
         ]
-    }
+    },
+    "minimum-stability": "dev"
 }
