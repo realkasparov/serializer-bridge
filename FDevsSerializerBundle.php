@@ -2,7 +2,6 @@
 
 namespace FDevs\Bridge\Serializer;
 
-use FDevs\Bridge\Serializer\DependencyInjection\Compiler\DataTypePass;
 use FDevs\Bridge\Serializer\DependencyInjection\Compiler\DocumentTypePass;
 use FDevs\Bridge\Serializer\DependencyInjection\Compiler\OptionPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,7 +16,6 @@ class FDevsSerializerBundle extends Bundle
     {
         $container
             ->addCompilerPass(new DocumentTypePass())
-            ->addCompilerPass(new DataTypePass())
             ->addCompilerPass(new OptionPass())
         ;
     }

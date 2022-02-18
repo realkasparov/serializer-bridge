@@ -5,12 +5,11 @@
 
     <parameters>
         <parameter key="f_devs_serializer.mapping.loader.xml_files.class">FDevs\Serializer\Mapping\Loader\XmlFilesLoader</parameter>
-        <parameter key="f_devs_serializer.mapping.factory.lazy_loading.class">FDevs\Serializer\Mapping\Factory\LazyLoadingMetadataFactory</parameter>
+        <parameter key="f_devs_serializer.mapping.factory.metadata_factory.class">FDevs\Serializer\Mapping\Factory\MetadataFactory</parameter>
         <parameter key="f_devs_serializer.normalizer.object.class">FDevs\Serializer\Normalizer\ObjectNormalizer</parameter>
-        <parameter key="f_devs_serializer.data_type_factory.class">FDevs\Serializer\DataTypeFactory</parameter>
+        <parameter key="f_devs_serializer.property_factory_factory.class">FDevs\Serializer\PropertyFactory</parameter>
         <parameter key="f_devs_serializer.option_registry.class">FDevs\Serializer\OptionRegistry</parameter>
-        <parameter key="f_devs_serializer.data_type.collection.class">FDevs\Serializer\DataType\CollectionType</parameter>
-        <parameter key="f_devs_serializer.data_type.object.class">FDevs\Serializer\DataType\ObjectType</parameter>
+        <parameter key="f_devs_serializer.option_manager.class">FDevs\Serializer\OptionManager</parameter>
         <parameter key="f_devs_serializer.data_type.doctrine.class">FDevs\Serializer\DataType\DoctrineType</parameter>
     </parameters>
 
@@ -18,38 +17,33 @@
 
         <!--loader-->
         <service id="f_devs_serializer.mapping.loader.xml_files" class="%f_devs_serializer.mapping.loader.xml_files.class%">
-            <argument/>
+            <argument type="collection"/>
+            <argument type="service" id="f_devs_serializer.option_registry"/>
         </service>
 
         <!--factory-->
-        <service id="f_devs_serializer.mapping.factory.lazy_loading" class="%f_devs_serializer.mapping.factory.lazy_loading.class%">
+        <service id="f_devs_serializer.mapping.factory.metadata_factory" class="%f_devs_serializer.mapping.factory.metadata_factory.class%">
             <argument type="service" id="f_devs_serializer.mapping.loader.xml_files"/>
+        </service>
+
+        <service id="f_devs_serializer.property_factory_factory" class="%f_devs_serializer.property_factory_factory.class%">
+            <argument type="service" id="f_devs_serializer.option_manager"/>
         </service>
 
         <!--normalizer-->
         <service id="f_devs_serializer.normalizer.object" class="%f_devs_serializer.normalizer.object.class%">
-            <argument type="service" id="f_devs_serializer.mapping.factory.lazy_loading"/>
-            <argument type="service" id="f_devs_serializer.data_type_factory"/>
+            <argument type="service" id="f_devs_serializer.mapping.factory.metadata_factory"/>
+            <argument type="service" id="f_devs_serializer.property_factory_factory"/>
             <tag name="serializer.normalizer"/>
         </service>
 
         <!--data type registry-->
-        <service id="f_devs_serializer.data_type_factory" class="%f_devs_serializer.data_type_factory.class%">
-            <argument type="collection"/>
-        </service>
-
         <service id="f_devs_serializer.option_registry" class="%f_devs_serializer.option_registry.class%">
             <argument type="collection"/>
         </service>
 
-        <!--data type-->
-        <service id="f_devs_serializer.data_type.collection" class="%f_devs_serializer.data_type.collection.class%" public="false">
-            <argument type="service" id="f_devs_serializer.data_type_factory"/>
-            <tag name="f_devs_serializer.data_type" type="collection"/>
-        </service>
-
-        <service id="f_devs_serializer.data_type.object" class="%f_devs_serializer.data_type.object.class%" public="false">
-            <tag name="f_devs_serializer.data_type" type="object"/>
+        <service id="f_devs_serializer.option_manager" class="%f_devs_serializer.option_manager.class%">
+            <argument type="service" id="f_devs_serializer.option_registry"/>
         </service>
 
     </services>

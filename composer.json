@@ -1,5 +1,5 @@
 {
-    "name": "fdevs/serializer-bridge",
+    "name": "realkasparov/serializer-bridge",
     "type": "symfony-bridge",
     "description": "FDevs Serializer Bridge",
     "keywords": [
@@ -8,9 +8,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Andrey Samusev",
-            "email": "andrey_simfi@list.ru",
-            "homepage": "http://andrey.4devs.io"
+            "name": "Aleksandr Novikov",
+            "email": "alexander1243@yandex.ru"
         },
         {
             "name": "4devs Community",
@@ -18,14 +17,16 @@
         }
     ],
     "require": {
-        "fdevs/serializer": "~0.1",
+        "fdevs/serializer": "dev-master",
         "php": ">=5.5.9"
     },
     "require-dev": {
-        "symfony/dependency-injection": "~2.8|~3.0",
-        "symfony/http-kernel": "~2.8|~3.0"
+        "symfony/dependency-injection": "^2.8|^3.0|^4.0|^5.0",
+        "symfony/http-kernel": "^2.8|^3.0|^4.0|^5.0",
+        "symfony/framework-bundle": "^4.0|^5.0"
     },
     "suggest": {
+        "symfony/framework-bundle": "use with symfony framework",
         "symfony/dependency-injection": "use with dependency injection",
         "symfony/http-kernel": "use with symfony bundle"
     },

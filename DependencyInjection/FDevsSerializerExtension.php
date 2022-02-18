@@ -14,21 +14,30 @@ class FDevsSerializerExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
-        $files = [];
         $bundles = $container->getParameter('kernel.bundles');
         foreach ($bundles as $name => $class) {
             $ref = new \ReflectionClass($class);
-            $path = realpath(dirname($ref->getFileName()).'/Resources/config/fdevs_serializer');
+            $path = realpath(dirname($ref->getFileName()) . '/Resources/config/fdevs_serializer');
             if ($path) {
-                $files = array_merge($files, $this->readPath($ref->getNamespaceName(), $path, 'xml'));
+                $config['files'][] = [
+                    'namespace' => $ref->getNamespaceName(),
+                    'path' => $path,
+                    'extension' => 'xml',
+                ];
             }
+        }
+        $files = [];
+        foreach ($config['files'] as $file) {
+            $files = array_merge($files, $this->readPath($file['namespace'], $file['path'], $file['extension']));
         }
         $container
             ->getDefinition('f_devs_serializer.mapping.loader.xml_files')
-            ->replaceArgument(0, $files)
-        ;
+            ->replaceArgument(0, $files);
     }
 
     /**
@@ -45,12 +54,12 @@ class FDevsSerializerExtension extends Extension
             new \RecursiveDirectoryIterator($dir),
             \RecursiveIteratorIterator::LEAVES_ONLY
         );
-        $nsPrefix = $prefix !== '' ? $prefix.'\\' : '';
+        $nsPrefix = $prefix !== '' ? $prefix . '\\' : '';
         foreach ($iterator as $file) {
-            if (($fileName = $file->getBasename('.'.$extension)) == $file->getBasename()) {
+            if (($fileName = $file->getBasename('.' . $extension)) == $file->getBasename()) {
                 continue;
             }
-            $files[$nsPrefix.str_replace('.', '\\', $fileName)] = $file->getPathName();
+            $files[$nsPrefix . str_replace('.', '\\', $fileName)] = $file->getPathName();
         }
 
         return $files;

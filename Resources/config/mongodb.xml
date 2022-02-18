@@ -12,7 +12,7 @@
         <service id="f_devs_serializer.data_type.document" class="%f_devs_serializer.data_type.doctrine.class%" public="false">
             <argument type="service" id="f_devs_serializer.mongodb_default_manager"/>
             <argument type="service" id="property_accessor" on-invalid="null"/>
-            <tag name="f_devs_serializer.data_type" type="document"/>
+            <tag name="f_devs_serializer.option" option-name="document"/>
         </service>
 
     </services>
