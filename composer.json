@@ -1,5 +1,5 @@
 {
-    "name": "fdevs/serializer-bridge",
+    "name": "realkasparov/serializer-bridge",
     "type": "symfony-bridge",
     "description": "FDevs Serializer Bridge",
     "keywords": [
@@ -8,9 +8,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Andrey Samusev",
-            "email": "andrey_simfi@list.ru",
-            "homepage": "http://andrey.4devs.io"
+            "name": "Aleksandr Novikov",
+            "email": "alexander1243@yandex.ru"
         },
         {
             "name": "4devs Community",
@@ -18,7 +17,7 @@
         }
     ],
     "require": {
-        "fdevs/serializer": "~1.0",
+        "fdevs/serializer": "dev-master",
         "php": ">=5.5.9"
     },
     "require-dev": {
