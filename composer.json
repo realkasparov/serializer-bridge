@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "fdevs/serializer": "dev-master",
+        "fdevs/serializer": "dev-feature/fixDeprecating",
         "php": ">=5.5.9"
     },
     "require-dev": {
